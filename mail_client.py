@@ -32,28 +32,60 @@ def send_mail(recipient: str, sender: str, subject: str, body: str) -> bool:
     pprint.pprint(response.json())
 
 def get_inbox(recipient: str) -> None:
-    """TODO: fill out this docstring (using the send_mail docstring as a guide)
+    """
+    Gets all mail entries for a recipient from the server
+
+    Args:
+        recipient (str): The recipient of the mail
+
+    Returns:
+        None
     """
     response = requests.get(f'{SERVER}/mail/inbox/{recipient}')
     pprint.pprint(response.json())
 
 def get_sent(sender: str) -> None:
-    """TODO: fill out this docstring (using the send_mail docstring as a guide)
+    """
+    Gets all mail entries for a sender from the server
+
+    Args:
+        sender (str): The sender of the mail
+
+    Returns:
+        None
     """
     response = requests.get(f'{SERVER}/mail/sent/{sender}')
     pprint.pprint(response.json())
 
 def get_mail(mail_id: str) -> None:
-    """TODO: fill out this docstring (using the send_mail docstring as a guide)
+    """
+    Gets a mail entry from the server
+
+    Args:
+        mail_id (str): The id of the mail entry to get
+
+    Returns:
+        None
     """
     response = requests.get(f'{SERVER}/mail/{mail_id}')
     pprint.pprint(response.json())
 
 def delete_mail(mail_id: str) -> None:
-    """TODO: fill out this docstring (using the send_mail docstring as a guide)
+    """
+    Deletes a mail entry from the server
+
+    Args:
+        mail_id (str): The id of the mail entry to delete
+
+    Returns:
+        None
     """
     response = requests.delete(f'{SERVER}/mail/{mail_id}')
     pprint.pprint(response.json())
+    # if response.status_code == 200:
+    #     print("Mail deleted successfully")
+    # else:
+    #     print("Failed to delete mail")
 
 # Command Line Interface
 # making CLIs with argparse may be helpful for you in the future
@@ -120,3 +152,9 @@ def main():
 if __name__ == '__main__':
     main()
 
+
+# python mail_client.py send -t "recipient" -f "sender" -s "subject" "body"
+# python mail_client.py inbox -u "recipient"
+# python mail_client.py sent -u "sender"
+# python mail_client.py get "66ab1b92-4abd-45cc-991c-39cd58cfc9d3"
+# python mail_client.py delete "66ab1b92-4abd-45cc-991c-39cd58cfc9d3"
