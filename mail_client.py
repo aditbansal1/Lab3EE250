@@ -2,7 +2,7 @@ import requests
 import argparse
 import pprint # For pretty printing
 
-SERVER = 'http://localhost:5000'
+SERVER = 'http://172.20.10.2:5000'
 
 def send_mail(recipient: str, sender: str, subject: str, body: str) -> bool:
     """
@@ -12,7 +12,9 @@ def send_mail(recipient: str, sender: str, subject: str, body: str) -> bool:
     - sender
     - subject
     - body
-    
+    POST /mail HTTP/1.1 Host: localhost:5000 Content-Type: application/json
+
+{"recipient": "aiden@usc.edu", "sender": "adit@usc.edu", "subject": "Lab 03", "body": "Hello!"}
     Args:
         recipient (str): The recipient of the mail
         sender (str): The sender of the mail
