@@ -2,7 +2,20 @@ import requests
 
 # WeatherAPI key
 WEATHER_API_KEY = 'd603d4cd0eb74fc1af3193710260902'  # TODO: Replace with your own WeatherAPI key
-
+def get_joke():
+    """Fetches a random joke from the Official Joke API[cite: 116]."""
+    url = "https://official-joke-api.appspot.com/random_joke"
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            joke = response.json()
+            print(f"\n--- Random Joke for your day ---")
+            print(f"Setup: {joke['setup']}")
+            print(f"Punchline: {joke['punchline']}")
+        else:
+            print(f"\n(Could not fetch a joke at this time.)")
+    except Exception:
+        pass # Silently fail so it doesn't interrupt the weather flow
 def get_weather(city):
     # TODO: Build the API request URL using the base API endpoint, the API key, and the city name provided by the user.
     base_url = "http://api.weatherapi.com/v1/current.json"
@@ -73,3 +86,5 @@ if __name__ == '__main__':
     
     # TODO: Call the 'get_weather' function with the city name provided by the user.
     get_weather(user_city)
+# Bonus: Call the additional production API.
+    get_joke()
